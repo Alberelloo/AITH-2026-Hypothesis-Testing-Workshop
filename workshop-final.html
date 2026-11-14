@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Воркшоп «Эксперименты от гипотезы до портфеля»</title>
+<style>
+  :root {
+    --ink: #1c2329;
+    --muted: #5b6a76;
+    --line: #e3e8ec;
+    --soft: #f5f7f9;
+    --accent: #0b6bcb;
+    --accent-soft: #e9f2fb;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    color: var(--ink);
+    background: #ffffff;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  .page { max-width: 920px; margin: 0 auto; padding: 48px 24px 72px; }
+  header.masthead { border-bottom: 2px solid var(--ink); padding-bottom: 20px; margin-bottom: 8px; }
+  h1 { font-size: 32px; line-height: 1.2; margin: 0 0 10px; letter-spacing: -0.01em; }
+  .subtitle { color: var(--muted); font-size: 17px; margin: 0; }
+  section { margin-top: 40px; }
+  h2 {
+    font-size: 22px; margin: 0 0 14px;
+    display: flex; align-items: baseline; gap: 12px;
+  }
+  h2 .num { color: var(--accent); font-weight: 700; }
+  h3 { font-size: 17px; margin: 20px 0 8px; }
+  p { margin: 8px 0; }
+  ul { margin: 8px 0 8px 22px; padding: 0; }
+  li { margin: 4px 0; }
+  .muted { color: var(--muted); }
+  .tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; }
+  th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+  thead th { background: var(--soft); font-weight: 600; white-space: nowrap; }
+  tbody tr:last-child td { border-bottom: none; }
+  td strong { white-space: nowrap; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+  .card { border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; background: var(--soft); }
+  .card h3 { margin-top: 0; }
+  .steps { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 4px; }
+  .step {
+    flex: 1 1 130px; border: 1px solid var(--line); border-radius: 8px;
+    padding: 12px 10px; background: #fff; position: relative;
+  }
+  .step .k { font-weight: 700; color: var(--accent); font-size: 13px; }
+  .step .t { font-weight: 600; margin: 2px 0 4px; }
+  .step .d { color: var(--muted); font-size: 13px; }
+  .badge { display: inline-block; background: var(--accent-soft); color: var(--accent); border-radius: 999px; padding: 1px 10px; font-size: 13px; font-weight: 600; }
+  .footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="masthead">
+    <h1>Воркшоп «Эксперименты от гипотезы до портфеля»</h1>
+    <p class="subtitle">Практико-ориентированный курс по A/B-тестированию и дизайну экспериментов · 6 встреч по 2 часа</p>
+  </header>
+
+  <section id="about">
+    <h2><span class="num">1.</span> Что это за воркшоп</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Формат</h3>
+        <ul>
+          <li>6 встреч по 120 минут: вход, теория, практика, перерыв, дебриф, домашнее задание.</li>
+          <li>Около 60% времени — практика на данных и документах.</li>
+          <li>Сквозной артефакт — плейбук из шести разделов, собирается по ходу.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Итог</h3>
+        <p>Участник проводит один эксперимент по полному жизненному циклу: от бизнес-кейса и дизайна до мемо с решением и вписывает вывод в портфель знаний команды.</p>
+      </div>
+    </div>
+
+    <h3>Жизненный цикл эксперимента</h3>
+    <div class="steps">
+      <div class="step"><span class="k">1</span><div class="t">Стоит ли и на чём</div><div class="d">бизнес-кейс, единица, метрика</div></div>
+      <div class="step"><span class="k">2</span><div class="t">План теста</div><div class="d">мощность, MDE, pre-registration</div></div>
+      <div class="step"><span class="k">3</span><div class="t">Запуск</div><div class="d">сплитование, SRM, телеметрия</div></div>
+      <div class="step"><span class="k">4</span><div class="t">Остановка</div><div class="d">последовательный анализ, futility</div></div>
+      <div class="step"><span class="k">5</span><div class="t">Где A/B ломается</div><div class="d">кластеры, оффлайн, switchback</div></div>
+      <div class="step"><span class="k">6</span><div class="t">Решение и портфель</div><div class="d">мемо, сегменты, мета-анализ</div></div>
+    </div>
+  </section>
+
+  <section id="audience">
+    <h2><span class="num">2.</span> Аудитория и пререквизиты</h2>
+    <p><strong>Аудитория.</strong> Аналитики данных, продуктовые аналитики и ML-инженеры, которые уже запускали простые A/B-тесты и работают с маркетплейсами, ритейлом или офлайн и гео-задачами.</p>
+    <p><strong>Пререквизиты.</strong></p>
+    <ul>
+      <li>Python: pandas, numpy, базовый Jupyter или Colab.</li>
+      <li>Статистика: случайные величины, распределения, ЦПТ, доверительные интервалы, проверка гипотез — p-value, ошибки I и II рода.</li>
+      <li>Желательно: один A/B-тест от дизайна до решения.</li>
+      <li>Не требуется: байесовская статистика и causal inference.</li>
+    </ul>
+  </section>
+
+  <section id="goals">
+    <h2><span class="num">3.</span> Цели и образовательные результаты</h2>
+    <div class="grid">
+      <div class="card"><h3>Цели</h3>
+        <ul>
+          <li><strong>Процесс.</strong> Единый стандарт дизайна и ревью экспериментов в команде.</li>
+          <li><strong>Навык.</strong> Уверенное владение инструментами: мощность, остановка, выбор дизайна.</li>
+          <li><strong>Коммуникация.</strong> Результат доходит до бизнеса корректно и становится решением.</li>
+        </ul>
+      </div>
+      <div class="card"><h3>Образовательные результаты</h3>
+        <p class="muted">После воркшопа участник умеет шесть вещей (см. матрицу выравнивания ниже).</p>
+      </div>
+    </div>
+    <ol>
+      <li>Проектировать валидный эксперимент: гипотеза, единица рандомизации, метрики, α и MDE, план зафиксирован до старта. <span class="muted">(встречи 1–2)</span></li>
+      <li>Диагностировать данные и анализировать тест: SRM, телеметрия, эффект с доверительным интервалом, роли метрик и поправки. <span class="muted">(встреча 3)</span></li>
+      <li>Считать мощность и размер выборки; применять стратификацию и CUPED для сокращения длительности. <span class="muted">(встреча 2)</span></li>
+      <li>Применять последовательный анализ и futility; отчитываться о ранней остановке без завышения. <span class="muted">(встреча 4)</span></li>
+      <li>Выбирать дизайн под ограничение: кластеры и ICC, оффлайн-пилот с DiD и плацебо, switchback. <span class="muted">(встреча 5)</span></li>
+      <li>Писать мемо с эффектом и доверительным интервалом в деньгах, анализировать сегменты без p-hacking, вписывать тест в портфель. <span class="muted">(встреча 6)</span></li>
+    </ol>
+  </section>
+
+  <section id="program">
+    <h2><span class="num">4.</span> Программа серии</h2>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>Встреча</th><th>Тема</th><th>Что внутри</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>1</strong></td><td>Стоит ли тестировать и на чём измерять</td><td>Окупаемость и MDE в деньгах; α и n как риск-менеджмент; ошибки S и M; единица рандомизации и метрика как решение.</td></tr>
+          <tr><td><strong>2</strong></td><td>План теста</td><td>Мощность, MDE, сплит, длительность; стратификация и CUPED; pre-registration.</td></tr>
+          <tr><td><strong>3</strong></td><td>Запуск и доверие к данным</td><td>Хеш и соль, бакеты; множественные A/A и SRM; телеметрия и триггеринг.</td></tr>
+          <tr><td><strong>4</strong></td><td>Остановка</td><td>Peeking; GST и α-spending; mSPRT; futility и экономия выборки.</td></tr>
+          <tr><td><strong>5</strong></td><td>Где обычный A/B ломается</td><td>ICC и дизайн-эффект; оффлайн-пилот с DiD и плацебо; интерференция и switchback.</td></tr>
+          <tr><td><strong>6</strong></td><td>Решение, мемо, портфель</td><td>Эффект и доверительный интервал в деньгах; сегменты и CATE; мета-анализ и ревью-борд.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="matrix">
+    <h2><span class="num">5.</span> Матрица выравнивания</h2>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>Результат</th><th>Задание — артефакт</th><th>Оценивание — критерий</th><th>Метрика</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1. Проектировать</td><td>Дизайн-док на встрече 2</td><td>Рубрика из 5 пунктов: MDE, guardrail, единица, правило остановки, метрика</td><td>Результативность: доля доков с 4 из 5; сдвиг pre/post по блоку «дизайн»</td></tr>
+          <tr><td>2. Диагностировать</td><td>SRM-детектив, A/A, телеметрия на встрече 3</td><td>Автопроверка assert и вывод о причине</td><td>Результативность: доля прошедших автопроверку</td></tr>
+          <tr><td>3. Считать мощность</td><td>Расчёт n, CUPED, длительность на встрече 2</td><td>Автопроверка и совпадение с эталоном</td><td>Результативность; сдвиг pre/post по блоку «мощность»</td></tr>
+          <tr><td>4. Останавливать</td><td>Границы и политика остановки на встрече 4</td><td>Рубрика: покрыты успех и futility, указана поправка на смещение</td><td>Результативность; сдвиг pre/post по блоку «последовательный анализ»</td></tr>
+          <tr><td>5. Выбирать дизайн</td><td>ICC/DE, DiD против матчинга, окно switchback на встрече 5</td><td>Автопроверка и вердикт по кейсу</td><td>Результативность</td></tr>
+          <tr><td>6. Коммуницировать</td><td>Мемо и ревью-борд на встрече 6</td><td>Рубрика мемо: эффект, доверительный интервал, деньги, риски, рекомендация; ревью в парах</td><td>Результативность; удовлетворённость</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="assessment">
+    <h2><span class="num">6.</span> Система проверки знаний</h2>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>Инструмент</th><th>Как устроен</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Входной тест</strong></td><td>12–15 вопросов, 25 минут, до встречи 1. Диагностика базы и базовая линия для pre/post.</td></tr>
+          <tr><td><strong>Выходной тест</strong></td><td>20–25 вопросов, 40 минут, после встречи 6. Якорные вопросы входного плюс продвинутые.</td></tr>
+          <tr><td><strong>Домашки</strong></td><td>6 штук по 30–40 минут. Ноутбук с автопроверкой. Сдача до следующей встречи, разбор 5 минут.</td></tr>
+          <tr><td><strong>Плейбук</strong></td><td>6 разделов, собирается по ходу, итоговая сдача как проект.</td></tr>
+          <tr><td><strong>Обратная связь</strong></td><td>CSAT и NPS после встреч, итоговый опрос.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Как проверяется прогресс</h3>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>Что меряем</th><th>Как</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Сдвиг знаний</td><td>Парный pre/post по якорным вопросам</td></tr>
+          <tr><td>Закрепление навыка</td><td>Доля сданных и прошедших автопроверку домашек</td></tr>
+          <tr><td>Перенос в работу</td><td>Качество плейбука по рубрике</td></tr>
+          <tr><td>Участие</td><td>Посещаемость и доля досдавших плейбук</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="metrics">
+    <h2><span class="num">7.</span> Контрольные точки и метрики</h2>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>Категория</th><th>Метрика</th><th>Источник</th><th>Цель</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Охват</strong></td><td>Число записавшихся; доля целевой аудитории</td><td>Форма записи</td><td>80% целевой аудитории</td></tr>
+          <tr><td><strong>Вовлечённость</strong></td><td>Посещаемость от 4 из 6 встреч; доля сданных домашек; доля досдавших плейбук</td><td>Журнал встреч, домашки, плейбук</td><td>70% посещаемости, 70% домашек, 60% плейбуков</td></tr>
+          <tr><td><strong>Результативность</strong></td><td>Сдвиг pre/post; доля прошедших порог выходного теста; средний балл плейбука</td><td>Тесты, рубрика плейбука</td><td>Сдвиг от +30%, порог 70%, балл от 4 из 5</td></tr>
+          <tr><td><strong>Удовлетворённость</strong></td><td>NPS; средний CSAT</td><td>Опросы после встреч и итоговый</td><td>NPS от +30, CSAT от 4.0 из 5</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="footer">Воркшоп «Эксперименты от гипотезы до портфеля» · итоговое представление</div>
+
+</div>
+</body>
+</html>
