@@ -146,6 +146,49 @@ check(np.allclose(pf.ci_low, pf.effect - 1.959963984540054 * pf.se, atol=5e-3), 
 check(np.allclose(pf.ci_high, pf.effect + 1.959963984540054 * pf.se, atol=5e-3), "ci_high = effect + 1.96·se")
 check((pf.p_value < 0.05).sum() == 2, "2 значимых теста из 6")
 
+# ============================ SRM-детектив (встреча 3) =====================
+from scipy.stats import chisquare
+
+
+def srm_p(groups, share_b):
+    c = groups.value_counts().reindex(["A", "B"], fill_value=0).to_numpy()
+    return chisquare(c, c.sum() * np.array([1 - share_b, share_b])).pvalue
+
+
+SRM_COLS = ["user_id", "date", "group", "device", "source", "is_bot", "lag_sec", "converted"]
+print("\n" + "=" * 78)
+for k in range(1, 6):
+    name = f"srm_case_{k}.csv"
+    sc = pd.read_csv(D / name)
+    hum = sc[sc.is_bot == 0]
+    print(f"{name}  {size(name):.2f} МБ  {sc.shape[0]:,} x {sc.shape[1]}  доля B без ботов {hum.group.eq('B').mean():.4f}")
+    check(list(sc.columns) == SRM_COLS, f"{name}: колонки")
+    check(20_000 <= len(sc) <= 40_000, f"{name}: 20–40 тыс. строк")
+    check(sc.isna().sum().sum() == 0 and sc.user_id.is_unique, f"{name}: без пропусков, user_id уникальны")
+    check(sc.date.nunique() == 14 and set(sc.group) == {"A", "B"}, f"{name}: 14 дней, группы A/B")
+    check(srm_p(hum.group, 0.2) < 1e-3, f"{name}: SRM без ботов (p < 0.001)")
+c1 = pd.read_csv(D / "srm_case_1.csv").query("is_bot == 0")
+check(c1[c1.source == "ads"].group.eq("B").mean() < 0.14, "кейс 1: дефицит B в ads")
+c2 = pd.read_csv(D / "srm_case_2.csv").query("is_bot == 0")
+check(c2[c2.date == c2.date.min()].group.eq("B").mean() < 0.08, "кейс 2: дефицит B в первый день")
+c3 = pd.read_csv(D / "srm_case_3.csv")
+check(srm_p(c3.group, 0.2) > 0.01 and c3.groupby("group").is_bot.mean()["B"] > 0.07, "кейс 3: со всеми строками сплит честный, ботов в B больше")
+c4 = pd.read_csv(D / "srm_case_4.csv").query("is_bot == 0")
+check(c4[c4.device == "ios"].group.eq("B").mean() < 0.12, "кейс 4: дефицит B на iOS")
+c5 = pd.read_csv(D / "srm_case_5.csv").query("is_bot == 0")
+check(c5[c5.group == "B"].lag_sec.max() <= 3600 and c5[c5.group == "B"].lag_sec.median() > 300, "кейс 5: лаг B — минуты, обрыв на 3600 с")
+
+tl = pd.read_csv(D / "telemetry_ab.csv")
+print(f"telemetry_ab.csv  {size('telemetry_ab.csv'):.2f} МБ  {tl.shape[0]:,} x {tl.shape[1]}")
+check(list(tl.columns) == ["user_id", "date", "group", "device", "triggered", "exposure_logged", "converted"], "telemetry: колонки")
+check(tl.isna().sum().sum() == 0 and tl.user_id.is_unique, "telemetry: без пропусков, user_id уникальны")
+check(srm_p(tl.group, 0.5) > 0.01, "telemetry: назначение 50/50 без SRM")
+check((tl.exposure_logged <= tl.triggered).all(), "telemetry: событие показа только у triggered")
+tt = tl[tl.triggered == 1]
+loss = 1 - tt.groupby("group").exposure_logged.mean()
+check(loss["A"] < 0.03 and loss["B"] > 0.08, f"telemetry: потеря A {loss['A']:.3f}, B {loss['B']:.3f}")
+check(abs(tl.triggered.mean() - 0.25) < 0.01, "telemetry: доля triggered ≈ 25%")
+
 print("\n" + "=" * 78)
 print(f"ПРОЙДЕНО: {len(ok)}; ПРОВАЛЕНО: {len(bad)}")
 for b in bad:
