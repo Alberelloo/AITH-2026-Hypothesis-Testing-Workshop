@@ -1,0 +1,14 @@
+participant_id,test,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20
+syn_01,entry,"0,46",A,C,B,A,6,50,A,B,D,240,C,A,64,,,,,,
+syn_01,exit,"0,23",C,"B,C,E",ACD,A,B,D,12.5,BC,A,D,0.15,ABC,125,C,BD,D,B,0.6,BCE
+syn_02,entry,0.185,B,C,D,A,16.7,25,A,C,D,69,C,B,64,,,,,,
+syn_02,exit,0.23,C,BCE,ACD,A,B,D,12.5,BC,A,D,0.15,ABC,125,C,BD,D,B,0.6,BCE
+syn_03,entry,0.14,A,A,A,B,6,50,B,B,A,240,B,A,100,,,,,,
+syn_03,exit,0.14,C,BC,ABCD,A,A,D,8,C,B,B,0.18,AB,125,B,BD,A,A,0.42,BCE
+syn_04,entry,,B,C,D,B,16.7,50,A,B,D,,C,A,64%,,,,,,
+syn_04,exit,0.231,C,BCE,ACD,A,B,D,12.5,"B, C",A,D,0.15,ABCE,125,C,BD,D,B,0.6,ABCE
+syn_05,entry,0.185,A,C,D,A,8.3,25,A,B,D,69,C,B,64,,,,,,
+syn_05,exit,0.23,B,BCE,ACD,A,C,D,12.5,BC,B,D,0.003,ABC,128,C,B,D,B,0.6,BCE
+syn_06,entry,0.46,A,B,C,B,6,50,B,A,B,120,A,A,50,,,,,,
+syn_06,exit,0.23,C,BCE,ACD,C,B,D,8,BC,A,B,0.15,AB,125,C,BD,A,B,0.42,BE
+syn_07,entry,0.18,B,C,D,A,17,25,A,C,D,68.6,C,B,64,,,,,,
